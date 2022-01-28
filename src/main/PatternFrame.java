@@ -121,10 +121,8 @@ public class PatternFrame extends JFrame implements ActionListener{
 			resizeWidth = Integer.valueOf(resizeInformation.getText().split(",")[0]);
 			resizeHeight = Integer.valueOf(resizeInformation.getText().split(",")[1]);
 			
-			this.getContentPane().removeAll();
-			this.repaint();
-			this.add(new Pattern1Panel());
-			this.repaint();
+			this.changeToPanel();
+			this.resizeFrame(resizeWidth, resizeHeight);
 		}
 		if(e.getSource() == pattern1) {
 			pattern1.setBackground(Color.GREEN);
