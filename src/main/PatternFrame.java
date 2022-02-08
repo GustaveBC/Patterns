@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -83,7 +84,8 @@ public class PatternFrame extends JFrame implements ActionListener{
 	public void resizeFrame(int width, int height) {
 		screenWidth = width;
 		screenHeight = height;
-		this.setSize(screenWidth,screenHeight);
+//		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
+		this.setSize(screenWidth+100,screenHeight+100);
 	}
 	
 	private boolean checkIfCorrect(String temporaryData) {
@@ -102,12 +104,13 @@ public class PatternFrame extends JFrame implements ActionListener{
 		this.getContentPane().removeAll();
 		
 		if(patternChoice) {
-			this.add(new Pattern1Panel());
+			this.add(new Pattern1Panel(screenWidth,screenHeight));
+			System.out.println(screenHeight);
+			this.repaint();
 		}
 		else {
 			this.add(new Pattern2Panel());
 		}
-		
 		this.repaint();
 	}
 
@@ -122,7 +125,9 @@ public class PatternFrame extends JFrame implements ActionListener{
 			resizeHeight = Integer.valueOf(resizeInformation.getText().split(",")[1]);
 			
 			this.changeToPanel();
-			this.resizeFrame(resizeWidth, resizeHeight);
+			this.resizeFrame(resizeWidth, resizeHeight);// PUT RESIZE FIRST
+			System.out.println(screenWidth);
+			this.changeToPanel();
 		}
 		if(e.getSource() == pattern1) {
 			pattern1.setBackground(Color.GREEN);
