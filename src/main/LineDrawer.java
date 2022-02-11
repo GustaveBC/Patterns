@@ -29,9 +29,7 @@ public class LineDrawer {
 	}
 	
 	public void goDR1(Graphics g) {
-		g.setColor(Color.BLACK);
 		while(x2 < p1Panel.width || y2 < p1Panel.height) {
-//		for(int i = 0; i<12; i++) {
 			x1 = x2;
 			y1 = y2;
 			if(lineSquiggle) {
@@ -53,9 +51,7 @@ public class LineDrawer {
 	}
 
 	public void goUR1(Graphics g) {
-		p1Panel.temp = false;
 		while(x2 < p1Panel.width || y2 > 0) {
-//		for(int i = 0; i<12; i++) {
 			x1 = x2;
 			y1 = y2;
 			if(lineSquiggle) {
@@ -77,9 +73,7 @@ public class LineDrawer {
 		
 	}
 	public void goUL1(Graphics g) {
-		p1Panel.temp = false;
-		while(x2 < p1Panel.width || y2 > 0) {
-//		for(int i = 0; i<12; i++) {
+		while(x2 > 0 || y2 > 0) {
 			x1 = x2;
 			y1 = y2;
 			if(lineSquiggle) {
@@ -102,9 +96,7 @@ public class LineDrawer {
 	}
 	
 	public void goDL1(Graphics g) {
-		p1Panel.temp = false;
-		while(x2 < p1Panel.width || y2 > 0) {
-//		for(int i = 0; i<12; i++) {
+		while(x2 > 0 || y2 < p1Panel.width) {
 			x1 = x2;
 			y1 = y2;
 			if(lineSquiggle) {
@@ -119,9 +111,9 @@ public class LineDrawer {
 			}
 		}
 		if(x2 <= 0) {
-			p1Panel.directions = Directions.UL;
-		}else if(y2 >= p1Panel.height) {
 			p1Panel.directions = Directions.DR;
+		}else if(y2 >= p1Panel.height) {
+			p1Panel.directions = Directions.UL;
 		}
 		
 	}

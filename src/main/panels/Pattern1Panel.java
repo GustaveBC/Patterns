@@ -15,7 +15,6 @@ public class Pattern1Panel extends JPanel{
 	public int height;
 	public Directions directions = Directions.DR;
 	public LineDrawer lineDrawer;
-	public boolean temp = true;
 	
 	public Pattern1Panel(int width, int height) {
 		this.width = width;
@@ -32,7 +31,9 @@ public class Pattern1Panel extends JPanel{
 		lineDrawer.x2 = 0;
 		lineDrawer.y1 = 0;
 		lineDrawer.y2 = 0;
+		g.setColor(Color.BLACK);
 		while(!(lineDrawer.x2 >= width && lineDrawer.y2 >= height)) {
+//		for(int i = 0; i<12; i++) {
 			switch(directions) {
 			case DR:
 				lineDrawer.goDR1(g);
@@ -47,7 +48,7 @@ public class Pattern1Panel extends JPanel{
 				lineDrawer.goDL1(g);
 				
 			default:
-				System.out.println("failed");
+				System.out.println(directions.toString());
 			}
 			
 		}
