@@ -33,7 +33,6 @@ public class PatternFrame extends JFrame implements ActionListener{
 	public PatternFrame() {
 		this.setSize(screenWidth, screenHeight);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
 		this.setVisible(true);	
 		this.setResizable(false);	
 		this.setTitle("Patterns v1");
@@ -42,6 +41,7 @@ public class PatternFrame extends JFrame implements ActionListener{
 		resizeInstruction = new JLabel();
 		resizeInstruction.setFont(new Font("Sans Script", Font.PLAIN,12));
 		resizeInstruction.setText("<html><hr> Please insert the Width and Height for the pattern, separated by commas. Both should be between 50 and 2000(pixels)<hr></html>");
+		//resize informations are mutliplied by  25 afterwards.
 		resizeInstruction.setBounds((screenWidth-250)/2, 130, 250, 65);
 		
 		resizeInformation = new JTextField();
@@ -104,12 +104,14 @@ public class PatternFrame extends JFrame implements ActionListener{
 		this.getContentPane().removeAll();
 		
 		if(patternChoice) {
-			this.add(new Pattern1Panel(screenWidth,screenHeight));
+			 Pattern1Panel p1Panel = new Pattern1Panel(screenWidth,screenHeight);
+			 p1Panel.setBounds(50,50,screenWidth, screenHeight);
+			 this.add(p1Panel);
 			System.out.println(screenHeight);
 			this.repaint();
 		}
 		else {
-			this.add(new Pattern2Panel());
+			this.add(new Pattern2Panel(screenWidth,screenHeight));
 		}
 		this.repaint();
 	}
@@ -121,10 +123,9 @@ public class PatternFrame extends JFrame implements ActionListener{
 				resizeInformation.setText("Error");
 				return;
 			}
-			resizeWidth = Integer.valueOf(resizeInformation.getText().split(",")[0]);
-			resizeHeight = Integer.valueOf(resizeInformation.getText().split(",")[1]);
+			resizeWidth = Integer.valueOf(resizeInformation.getText().split(",")[0])*15;
+			resizeHeight = Integer.valueOf(resizeInformation.getText().split(",")[1])*15;
 			
-			this.changeToPanel();
 			this.resizeFrame(resizeWidth, resizeHeight);// PUT RESIZE FIRST
 			System.out.println(screenWidth);
 			this.changeToPanel();

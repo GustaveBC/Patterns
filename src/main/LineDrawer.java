@@ -12,11 +12,11 @@ public class LineDrawer {
 	private Pattern1Panel p1Panel;
 	private Pattern2Panel p2Panel;
 	
-	public int x1 = 0;
-	public int y1 = 0;
-	public int x2 = 0;
-	public int y2 = 0;
-	public final int LINE_SIZE = 25;
+	public int x1;
+	public int x2;
+	public int y1;
+	public int y2;
+	public final int LINE_SIZE = 15;
 	
 	public boolean lineSquiggle = true;
 
@@ -29,12 +29,12 @@ public class LineDrawer {
 	}
 	
 	public void goDR1(Graphics g) {
-		while(x2 < p1Panel.width || y2 < p1Panel.height) {
+		System.out.println("DR1");	
+		while(x2 < p1Panel.width1 && y2 < p1Panel.height1) {
 			x1 = x2;
 			y1 = y2;
 			if(lineSquiggle) {
 				x2 += LINE_SIZE;
-				System.out.println("test");	
 				g.drawLine(x1, y1, x2, y2);
 				lineSquiggle = false;
 			}else {
@@ -43,20 +43,23 @@ public class LineDrawer {
 				lineSquiggle = true;
 			}
 		}
-		if(x2 >= p1Panel.width) {
-			p1Panel.directions = Directions.DL;
-		}else if(y2 >= p1Panel.height) {
-			p1Panel.directions = Directions.UR;
+		if(x2 >= p1Panel.width1) {
+			p1Panel.directions1 = Directions.DL;
+		}else if(y2 >= p1Panel.height1) {
+			p1Panel.directions1 = Directions.UR;
+		}else {
+			System.out.println(x1+" "+x2);
 		}
 	}
 
 	public void goUR1(Graphics g) {
-		while(x2 < p1Panel.width || y2 > 0) {
+		System.out.println("UR1");	
+		while(x2 < p1Panel.width1 && y2 > 0) {
 			x1 = x2;
 			y1 = y2;
 			if(lineSquiggle) {
 				x2 += LINE_SIZE;
-				System.out.println("yeah");	
+				
 				g.drawLine(x1, y1, x2, y2);
 				lineSquiggle = false;
 			}else {
@@ -65,20 +68,22 @@ public class LineDrawer {
 				lineSquiggle = true;
 			}
 		}
-		if(x2 >= p1Panel.width) {
-			p1Panel.directions = Directions.UL;
+		if(x2 >= p1Panel.width1) {
+			p1Panel.directions1 = Directions.UL;
 		}else if(y2 <= 0) {
-			p1Panel.directions = Directions.DR;
+			p1Panel.directions1 = Directions.DR;
+		}else {
+			System.out.println(x1+" "+x2);
 		}
 		
 	}
 	public void goUL1(Graphics g) {
-		while(x2 > 0 || y2 > 0) {
+		System.out.println("UL1");	
+		while(x2 > 0 && y2 > 0) {
 			x1 = x2;
 			y1 = y2;
 			if(lineSquiggle) {
 				x2 -= LINE_SIZE;
-				System.out.println("hi");	
 				g.drawLine(x1, y1, x2, y2);
 				lineSquiggle = false;
 			}else {
@@ -88,20 +93,22 @@ public class LineDrawer {
 			}
 		}
 		if(x2 <= 0) {
-			p1Panel.directions = Directions.DL;
+			p1Panel.directions1 = Directions.UR;
 		}else if(y2 <= 0) {
-			p1Panel.directions = Directions.UR;
+			p1Panel.directions1 = Directions.DL;
+		}else {
+			System.out.println(x1+" "+x2);
 		}
 		
 	}
 	
 	public void goDL1(Graphics g) {
-		while(x2 > 0 || y2 < p1Panel.width) {
+		System.out.println("DL1");	
+		while(x2 > 0 && y2 < p1Panel.width1) {
 			x1 = x2;
 			y1 = y2;
 			if(lineSquiggle) {
 				x2 -= LINE_SIZE;
-				System.out.println("hello");	
 				g.drawLine(x1, y1, x2, y2);
 				lineSquiggle = false;
 			}else {
@@ -111,10 +118,108 @@ public class LineDrawer {
 			}
 		}
 		if(x2 <= 0) {
-			p1Panel.directions = Directions.DR;
-		}else if(y2 >= p1Panel.height) {
-			p1Panel.directions = Directions.UL;
+			p1Panel.directions1 = Directions.DR;
+		}else if(y2 >= p1Panel.height1) {
+			p1Panel.directions1 = Directions.UL;
+		}else {
+			System.out.println(x1+" "+x2);
 		}
 		
+	}
+	
+	public void  goDR2(Graphics g) {
+		System.out.println("DR2");
+		while(x2 < p2Panel.width2 && y2 < p2Panel.height2) {
+			
+			x1 = x2;
+			y1 = y2;
+			x2 += LINE_SIZE;
+			y2 += LINE_SIZE;
+			if(lineSquiggle) {
+				g.drawLine(x1, y1, x2, y2);
+				lineSquiggle = false;
+			}else {
+				lineSquiggle = true;
+			}
+		}
+		if(x2 >= p2Panel.width2) {
+			p2Panel.directions2 = Directions.DL;
+		}else if(y2 >= p2Panel.height2) {
+			p2Panel.directions2 = Directions.UR;
+		}else {
+			System.out.println(x1+" "+x2);
+		}
+	}
+	
+	public void  goUR2(Graphics g) {
+		System.out.println("UR2");
+		while(x2 < p2Panel.width2 && y2 > 0) {
+			
+			x1 = x2;
+			y1 = y2;
+			x2 += LINE_SIZE;
+			y2 -= LINE_SIZE;
+			if(lineSquiggle) {
+				g.drawLine(x1, y1, x2, y2);
+				lineSquiggle = false;
+			}else {
+				lineSquiggle = true;
+			}
+		}
+		if(x2 >= p2Panel.width2) {
+			p2Panel.directions2 = Directions.UL;
+		}else if(y2 <= 0) {
+			p2Panel.directions2 = Directions.DR;
+		}else {
+			System.out.println(x1+" "+x2);
+		}
+	}
+	
+	public void  goUL2(Graphics g) {
+		System.out.println("UL2");
+		while(x2 > 0 && y2 > 0) {
+			
+			x1 = x2;
+			y1 = y2;
+			x2 -= LINE_SIZE;
+			y2 -= LINE_SIZE;
+			if(lineSquiggle) {
+				g.drawLine(x1, y1, x2, y2);
+				lineSquiggle = false;
+			}else {
+				lineSquiggle = true;
+			}
+		}
+		if(x2 <= 0) {
+			p2Panel.directions2 = Directions.UR;
+		}else if(y2 <= 0) {
+			p2Panel.directions2 = Directions.DL;
+		}else {
+			System.out.println(x1+" "+x2);
+		}
+	}
+	
+	public void  goDL2(Graphics g) {
+		System.out.println("DL2");
+		while(x2 > 0 && y2 < p2Panel.height2) {
+			
+			x1 = x2;
+			y1 = y2;
+			x2 -= LINE_SIZE;
+			y2 += LINE_SIZE;
+			if(lineSquiggle) {
+				g.drawLine(x1, y1, x2, y2);
+				lineSquiggle = false;
+			}else {
+				lineSquiggle = true;
+			}
+		}
+		if(x2 <= 0) {
+			p2Panel.directions2 = Directions.DR;
+		}else if(y2 >= p2Panel.height2) {
+			p2Panel.directions2 = Directions.UL;
+		}else {
+			System.out.println(x1+" "+x2);
+		}
 	}
 }

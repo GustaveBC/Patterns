@@ -11,30 +11,32 @@ import main.LineDrawer;
 
 public class Pattern1Panel extends JPanel{
 	
-	public int width;
-	public int height;
-	public Directions directions = Directions.DR;
+	public int width1;
+	public int height1;
+	public Directions directions1 = Directions.DR;
 	public LineDrawer lineDrawer;
 	
 	public Pattern1Panel(int width, int height) {
-		this.width = width;
-		this.height = height;
-		this.setSize(this.width,this.height);
+		this.width1 = width;
+		this.height1 = height;
+		this.setSize(this.width1,this.height1);
 		this.lineDrawer = new LineDrawer(this);
 		this.setBorder(BorderFactory.createLineBorder(Color.GRAY,1));
 		System.out.println(height);
-		this.repaint();
+//		this.repaint();
 	}
 	
 	public void paintComponent(Graphics g) {
+		directions1 = Directions.DR;
+		System.out.println("REPAINTED");
 		lineDrawer.x1 = 0;
 		lineDrawer.x2 = 0;
 		lineDrawer.y1 = 0;
 		lineDrawer.y2 = 0;
 		g.setColor(Color.BLACK);
-		while(!(lineDrawer.x2 >= width && lineDrawer.y2 >= height)) {
-//		for(int i = 0; i<12; i++) {
-			switch(directions) {
+		while((lineDrawer.x2 < width1 || lineDrawer.y2 < height1) && (lineDrawer.x2 > 0 || lineDrawer.y2 < height1) && (lineDrawer.x2 < width1|| lineDrawer.y2 > 0)) {
+//		for(int i = 0; i<6; i++) {
+			switch(directions1) {
 			case DR:
 				lineDrawer.goDR1(g);
 				break;
@@ -48,9 +50,15 @@ public class Pattern1Panel extends JPanel{
 				lineDrawer.goDL1(g);
 				
 			default:
-				System.out.println(directions.toString());
+				System.out.println(directions1.toString());
 			}
-			
+//			try {
+//				Thread.sleep(3000);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			System.out.println(lineDrawer.x2+" "+lineDrawer.y2);
 		}
 	}
 
