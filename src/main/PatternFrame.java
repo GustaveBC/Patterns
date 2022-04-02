@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import main.panels.Pattern1Panel;
@@ -40,13 +41,13 @@ public class PatternFrame extends JFrame implements ActionListener{
 		
 		resizeInstruction = new JLabel();
 		resizeInstruction.setFont(new Font("Sans Script", Font.PLAIN,12));
-		resizeInstruction.setText("<html><hr> Please insert the Width and Height for the pattern, separated by commas. Both should be between 50 and 2000(pixels)<hr></html>");
-		//resize informations are mutliplied by  25 afterwards.
-		resizeInstruction.setBounds((screenWidth-250)/2, 130, 250, 65);
+		resizeInstruction.setText("<html><hr> Please insert the Width and Height for the pattern, separated by commas. Be careful: the dimensions are in pixels*15. If the dimensions given are superior to the one of your monitor, visual bugs may occur<hr></html>");
+		//resize informations are mutliplied by  15 afterwards.
+		resizeInstruction.setBounds((screenWidth-250)/2, 100, 250, 95);
 		
 		resizeInformation = new JTextField();
 		resizeInformation.setBounds((screenWidth-50)/2, 200, 50, 30);
-		resizeInformation.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		resizeInformation.setBorder(BorderFactory.createLineBorder(Color.BLACK));//125,83
 		
 		button = new JButton("Start");
 		button.setBounds((screenWidth-100)/2, (screenHeight-50)/2, 100, 50);
@@ -54,13 +55,13 @@ public class PatternFrame extends JFrame implements ActionListener{
 		button.setFocusable(false);
 		button.addActionListener(this);
 		
-		pattern1 = new JButton("Angles");
+		pattern1 = new JButton("Pattern 1");
 		pattern1.setFocusable(false);
 		pattern1.setBackground(Color.WHITE);
 		pattern1.addActionListener(this);
 		pattern1.setBounds((int) ((screenWidth-100)*0.25), (screenHeight-50)/2, 100, 50);
 		
-		pattern2 = new JButton("Line");
+		pattern2 = new JButton("Pattern 2");
 		pattern2.setFocusable(false);
 		pattern2.setBackground(Color.WHITE);
 		pattern2.addActionListener(this);
@@ -75,17 +76,16 @@ public class PatternFrame extends JFrame implements ActionListener{
 		this.add(resizeInstruction);
 		this.add(pattern1);
 		this.add(pattern2);
-		this.repaint();
+		this.getContentPane().repaint();
 		
 	}
 	
 
 	
 	public void resizeFrame(int width, int height) {
-		screenWidth = width;
-		screenHeight = height;
-//		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
-		this.setSize(screenWidth+100,screenHeight+100);
+		screenWidth = width+100;
+		screenHeight = height+100;
+		this.setSize(screenWidth, screenHeight);
 	}
 	
 	private boolean checkIfCorrect(String temporaryData) {
@@ -97,23 +97,31 @@ public class PatternFrame extends JFrame implements ActionListener{
 		}catch(NumberFormatException e) {
 			return false;
 		}
-		
 	}
 	
 	public void changeToPanel() {
+		JLabel sizeOf = new JLabel(resizeWidth+" "+resizeHeight);
+		sizeOf.setFont(new Font("Sans Script", Font.PLAIN,15));
+		sizeOf.setBackground(Color.WHITE);
+		sizeOf.setBounds((screenWidth-50)/2,screenHeight-20,50,20);
+		sizeOf.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		
 		this.getContentPane().removeAll();
 		
 		if(patternChoice) {
-			 Pattern1Panel p1Panel = new Pattern1Panel(screenWidth,screenHeight);
-			 p1Panel.setBounds(50,50,screenWidth, screenHeight);
+			 Pattern1Panel p1Panel = new Pattern1Panel(resizeWidth,resizeHeight);
+			 p1Panel.setBounds(50,0,resizeWidth,resizeHeight);
+			 
 			 this.add(p1Panel);
-			System.out.println(screenHeight);
-			this.repaint();
 		}
 		else {
-			this.add(new Pattern2Panel(screenWidth,screenHeight));
+			Pattern2Panel p2Panel = new Pattern2Panel(resizeWidth,resizeHeight);
+			p2Panel.setBounds(50,0,resizeWidth,resizeHeight);
+			
+			this.add(p2Panel);
 		}
-		this.repaint();
+		this.add(sizeOf);
+		this.getContentPane().repaint();
 	}
 
 	@Override
@@ -132,13 +140,20 @@ public class PatternFrame extends JFrame implements ActionListener{
 		}
 		if(e.getSource() == pattern1) {
 			pattern1.setBackground(Color.GREEN);
+			pattern2.setBackground(Color.WHITE);
 			patternChoice = true;
 		}
 		if(e.getSource() == pattern2) {
 			pattern2.setBackground(Color.GREEN);
+			pattern1.setBackground(Color.WHITE);
 			patternChoice = false;
 		}
 		
 	}
 	
 }
+//I have recently interested myself in computer generated patterns. 
+//Sadly, as a 1st year high school student, I am incapable of making sense of these results. The google doc linked sums it pretty well, and shows neat visual examples.
+//Tell me what you guys think about all of this! I haven't seen it anywhere else.
+
+//https://docs.google.com/document/d/1s22yAVgPNHMNY0aW7Dg7D6Gl9_9rRHNKq9G655xBm3E/edit?usp=sharing

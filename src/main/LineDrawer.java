@@ -104,7 +104,7 @@ public class LineDrawer {
 	
 	public void goDL1(Graphics g) {
 		System.out.println("DL1");	
-		while(x2 > 0 && y2 < p1Panel.width1) {
+		while(x2 > 0 && y2 < p1Panel.height1) {
 			x1 = x2;
 			y1 = y2;
 			if(lineSquiggle) {

@@ -33,7 +33,7 @@ public class Pattern2Panel extends JPanel{
 		lineDrawer.y2 = 0;
 		g.setColor(Color.BLACK);
 		while((lineDrawer.x2 < width2 || lineDrawer.y2 < height2) && (lineDrawer.x2 > 0 || lineDrawer.y2 < height2) && (lineDrawer.x2 < width2 || lineDrawer.y2 > 0)) {
-//		for(int i = 0; i<6; i++) {
+//		for(int i = 0; i<2; i++) {
 			switch(directions2) {
 			case DR:
 				lineDrawer.goDR2(g);
@@ -50,12 +50,6 @@ public class Pattern2Panel extends JPanel{
 			default:
 				System.out.println(directions2.toString());
 			}
-//			try {
-//				Thread.sleep(3000);
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
 			System.out.println(lineDrawer.x2+" "+lineDrawer.y2);
 		}
 	}

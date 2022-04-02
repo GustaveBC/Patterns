@@ -34,8 +34,8 @@ public class Pattern1Panel extends JPanel{
 		lineDrawer.y1 = 0;
 		lineDrawer.y2 = 0;
 		g.setColor(Color.BLACK);
-		while((lineDrawer.x2 < width1 || lineDrawer.y2 < height1) && (lineDrawer.x2 > 0 || lineDrawer.y2 < height1) && (lineDrawer.x2 < width1|| lineDrawer.y2 > 0)) {
-//		for(int i = 0; i<6; i++) {
+		while((lineDrawer.x2 < width1 || lineDrawer.y2 < height1) && (lineDrawer.x2 > 0 || lineDrawer.y2 < height1) && (lineDrawer.x2 < width1 || lineDrawer.y2 > 0)) {
+//		for(int i = 0; i<2; i++) {
 			switch(directions1) {
 			case DR:
 				lineDrawer.goDR1(g);
