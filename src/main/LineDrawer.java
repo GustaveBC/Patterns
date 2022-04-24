@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import main.panels.Directions;
 import main.panels.Pattern1Panel;
 import main.panels.Pattern2Panel;
+/* This class contains all the functions to go in each diagonals.
+ * There are two type: 1 for pattern 1, and another for pattern 2.
+ */
 
 public class LineDrawer {
 	

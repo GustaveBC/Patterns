@@ -23,10 +23,11 @@ public class PatternFrame extends JFrame implements ActionListener{
 	private JButton pattern2;
 	private JTextField resizeInformation;
 	private JLabel resizeInstruction;
+	private JLabel sizeOf;
 
-	public int resizeWidth;
+	public int resizeWidth;// bother resize[] variables will be the generated pannel's dimension
 	public int resizeHeight;
-	public int screenWidth = 800; 
+	public int screenWidth = 800; //those two variables will be the frame's dimension
 	public int screenHeight = 600;
 	
 	private boolean patternChoice = true;//true for pattern1, false for pattern2
@@ -67,6 +68,12 @@ public class PatternFrame extends JFrame implements ActionListener{
 		pattern2.addActionListener(this);
 		pattern2.setBounds((int) ((screenWidth-100)*0.75), (screenHeight-50)/2, 100, 50);
 		
+		sizeOf = new JLabel();
+		sizeOf.setFont(new Font("Sans Script", Font.PLAIN,15));
+		sizeOf.setBackground(Color.WHITE);
+		sizeOf.setBounds((screenWidth-50)/2,screenHeight-20,50,20);
+		sizeOf.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		
 		addComponents();
 	}
 
@@ -89,22 +96,22 @@ public class PatternFrame extends JFrame implements ActionListener{
 	}
 	
 	private boolean checkIfCorrect(String temporaryData) {
-		String[] splitted = temporaryData.split(",");
-		try{
-			int width = Integer.valueOf(splitted[0]);
-			int height = Integer.valueOf(splitted[1]);
-			return true;
-		}catch(NumberFormatException e) {
+		try {
+			String[] splitted = temporaryData.split(",");
+			try{
+				int width = Integer.valueOf(splitted[0]);
+				int height = Integer.valueOf(splitted[1]);
+				return true;
+			}catch(NumberFormatException e) {
+				return false;
+			}
+		}catch(ArrayIndexOutOfBoundsException e) {
 			return false;
 		}
 	}
 	
 	public void changeToPanel() {
-		JLabel sizeOf = new JLabel(resizeWidth+" "+resizeHeight);
-		sizeOf.setFont(new Font("Sans Script", Font.PLAIN,15));
-		sizeOf.setBackground(Color.WHITE);
-		sizeOf.setBounds((screenWidth-50)/2,screenHeight-20,50,20);
-		sizeOf.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		
 		
 		this.getContentPane().removeAll();
 		
@@ -120,6 +127,8 @@ public class PatternFrame extends JFrame implements ActionListener{
 			
 			this.add(p2Panel);
 		}
+		sizeOf.setBounds((resizeWidth-50)/2,resizeHeight+30,100,20);
+		sizeOf.setText(resizeWidth/15+","+resizeHeight/15);
 		this.add(sizeOf);
 		this.getContentPane().repaint();
 	}
