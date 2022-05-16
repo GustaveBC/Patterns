@@ -25,7 +25,7 @@ public class PatternFrame extends JFrame implements ActionListener{
 	private JLabel resizeInstruction;
 	private JLabel sizeOf;
 
-	public int resizeWidth;// bother resize[] variables will be the generated pannel's dimension
+	public int resizeWidth;// both "resize" variables will be the generated pannel's dimension
 	public int resizeHeight;
 	public int screenWidth = 800; //those two variables will be the frame's dimension
 	public int screenHeight = 600;
